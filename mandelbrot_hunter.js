@@ -1,5 +1,7 @@
 window.addEventListener("load", main);
-const iterBound = 500;
+const iterBound = 5000;
+const rzoom_min = 5;
+const rzoom_scale = 20;
 
 function loadShader(gl, type, source)
 {
@@ -63,13 +65,13 @@ function draw_target(gl, uniform)
     boundary = [];
     for(var x = 1; x < width - 1; x++) {
         for(var y = 1; y < height - 1; y++) {
-            if(pixels[(x + y * width)*4] == 255) {
-                var left = pixels[((x - 1) + y * width)*4];
-                var right = pixels[((x + 1) + y * width)*4];
-                var up = pixels[(x + (y + 1)*width)*4];
-                var down = pixels[(x + (y - 1)*width)*4];
+            if(pixels[(x + y * width)*4 + 3] == 255) {
+                var left = pixels[((x - 1) + y * width)*4 + 3];
+                var right = pixels[((x + 1) + y * width)*4 + 3];
+                var up = pixels[(x + (y + 1)*width)*4 + 3];
+                var down = pixels[(x + (y - 1)*width)*4 + 3];
                 
-                if(left*right*up*down == 0){
+                if(left+right+up+down < 255*4 ){
                     boundary.push([x, y]);
                 }
             }
@@ -78,7 +80,7 @@ function draw_target(gl, uniform)
     var center = boundary[Math.floor(Math.random() * boundary.length)];
     var x = 4 * center[0] / width - 2;
     var y = 4 * center[1] / height - 2;
-    var zoom = 3 + 12 * Math.random();
+    var zoom = rzoom_min + rzoom_scale * Math.random();
     render_frame(gl, uniform, x, y, zoom);
 }
 
@@ -109,6 +111,7 @@ function main()
     var target_canvas = document.getElementById("target_canvas");
     var target_gl = target_canvas.getContext("webgl");
     var target_uniform = setup_canvas(target_gl);
+    document.getElementById("new_target").onclick = () => draw_target(target_gl, target_uniform);
     draw_target(target_gl, target_uniform);
 
     var main_canvas = document.getElementById("main_canvas");
