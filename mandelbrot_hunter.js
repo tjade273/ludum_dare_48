@@ -1,5 +1,5 @@
 window.addEventListener("load", main);
-const iterBound = 5000;
+const iterBound = 30;
 const rzoom_min = 5;
 const rzoom_scale = 20;
 
