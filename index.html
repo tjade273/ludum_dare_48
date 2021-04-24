@@ -10,6 +10,21 @@
       <div class="canvas_wrapper">
 	<canvas id="my-canvas-object" width="600px" height="600px"></canvas>
       </div>
+      <div class="control_wrapper">
+	<div class="coordinate_controls">
+	  <label for="center_coord">Center: </label>
+	  <input type="number" step="any" id="center_coord" name="center_coord">
+	  <label for="zoom">Zoom: </label>
+	  <input type="number" step="any" id="zoom" name="zoom">
+	  <button type="button">Reset</button> 
+	</div>
+	<div class="info_wrapper">
+	  <div class="target_wrapper">
+	    <p class="target_text"> Target </p>
+	    <canvas class="target_canvas" width="200px" height="200px"></canvas>
+	  </div>
+	</div>
+      </div>
     </div>
   </body>
 </html>
