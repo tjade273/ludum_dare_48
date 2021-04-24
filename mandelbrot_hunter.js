@@ -1,6 +1,6 @@
 window.addEventListener("load", main);
 
-const iterBound = 50000;
+const iterBound = 500;
 
 function loadShader(gl, type, source)
 {

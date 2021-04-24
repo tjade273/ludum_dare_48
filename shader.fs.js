@@ -15,7 +15,7 @@ vec2 f(vec2 c, vec2 z){
 void main(){
     vec2 z = vec2(0.0);
     vec2 c = (4.0 * gl_FragCoord.xy / u_CanvasDimensions) - vec2(2.0);
-    c *= u_Zoom;
+    c /= u_Zoom;
     c += u_Center;
 
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
