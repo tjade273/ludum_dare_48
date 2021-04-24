@@ -56,7 +56,30 @@ function draw_main(gl, uniform)
 function draw_target(gl, uniform)
 {
     render_frame(gl, uniform, 0, 0, 1);
-    
+    var height = gl.drawingBufferHeight;
+    var width = gl.drawingBufferWidth;
+    var pixels = new Uint8Array(width * height * 4);
+    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+    boundary = [];
+    for(var x = 1; x < width - 1; x++) {
+        for(var y = 1; y < height - 1; y++) {
+            if(pixels[(x + y * width)*4] == 255) {
+                var left = pixels[((x - 1) + y * width)*4];
+                var right = pixels[((x + 1) + y * width)*4];
+                var up = pixels[(x + (y + 1)*width)*4];
+                var down = pixels[(x + (y - 1)*width)*4];
+                
+                if(left*right*up*down == 0){
+                    boundary.push([x, y]);
+                }
+            }
+        }
+    }
+    var center = boundary[Math.floor(Math.random() * boundary.length)];
+    var x = 4 * center[0] / width - 2;
+    var y = 4 * center[1] / height - 2;
+    var zoom = 3 + 12 * Math.random();
+    render_frame(gl, uniform, x, y, zoom);
 }
 
 /* Setup program and return uniform locations */
