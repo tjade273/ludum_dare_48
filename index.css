@@ -3,18 +3,26 @@
     min-width: 0;
     word-wrap: break-word;
     box-sizing: border-box;
+    font-size: 1em;
+}
+
+button {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .app_wrapper {
     width: 95vw;
     height: 95vh;
     display: flex;
+    overflow: hidden;
 }
 
 .canvas_wrapper {
     position: relative;
-    height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .canvas_wrapper canvas {
@@ -36,6 +44,8 @@
     margin-left: 10px;
     margin-top: 10px;
     min-height: 30vh;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .coordinate_controls {
@@ -64,6 +74,14 @@
 }
 
 .target_canvas {
+    max-height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.target_canvas {
     display: block;
     max-width: 100%;
     max-height: 100%;
@@ -74,16 +92,17 @@
     border-style: solid;
 }
 
+.control_input {
+    max-width: 6em;
+}
+
 @media (orientation: landscape) {
-    * {
-	font-size: 14px;
-    }
     .app_wrapper {
 	flex-direction: row;
     }
-    .control_wrapper {
-	flex-direction: column;
-    }    
+    .canvas_wrapper {
+	max-height: 100%;
+    }
     .coordinate_controls {
 	flex-direction: column;
     }
@@ -93,20 +112,31 @@
 }
 
 @media (orientation: portrait) {
-    * {
-	font-size: 5vh;
-    }
     .app_wrapper {
+	padding-top: 60px;
+	padding-bottom: 100px;
 	flex-direction: column;
+	padding-bottom: 60x;
+    } 
+    .canvas_wrapper {
+	max-height: 60%;
     }
-    .control_wrapper {
-	flex-direction: row;
-    }  
     .coordinate_controls {
 	flex-direction: row;
     }
     .info_wrapper {
 	flex-direction: row;
+    }
+    .target_canvas_wrapper canvas {
+	20vh;
+    }
+    .control_wrapper {
+	justify-content: center;
+	align-items: center;
+    }
+    .coordinate_controls {
+	justify-content: center;
+	align-items: center;
     }
 }
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <html lang=en>
   <head>
     <meta charset="UTF-8"/>
@@ -12,16 +13,22 @@
       </div>
       <div class="control_wrapper">
 	<div class="coordinate_controls">
+	  <div class="center_coord_wrapper">
 	  <label for="center_coord">Center: </label>
-	  <input type="number" step="any" id="center_coord" name="center_coord">
-	  <label for="zoom">Zoom: </label>
-	  <input type="number" step="any" id="zoom" name="zoom">
+	  <input class="control_input" type="number" step="any" id="center_coord" name="center_coord">
+	  </div>
+	  <div class="zoom_wrapper">
+	    <label for="zoom">Zoom :</label>
+	    <input class="control_input" type="number" step="any" id="zoom" name="zoom">
+	  </div>
 	  <button type="button">Reset</button> 
 	</div>
 	<div class="info_wrapper">
 	  <div class="target_wrapper">
 	    <p class="target_text"> Target </p>
-	    <canvas class="target_canvas" width="200px" height="200px"></canvas>
+	    <div class="target_canvas_wrapper">
+	      <canvas class="target_canvas" width="200px" height="200px"></canvas>
+	    </div>
 	  </div>
 	</div>
       </div>
