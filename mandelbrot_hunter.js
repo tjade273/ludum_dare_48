@@ -1,5 +1,4 @@
 window.addEventListener("load", main);
-
 const iterBound = 500;
 
 function loadShader(gl, type, source)
@@ -33,12 +32,8 @@ function initShaderProgram(gl, vsSource, fsSource) {
     return shaderProgram;
 }
 
-
-function renderFrame(gl, uniform, )
+function render_frame(gl, uniform, x, y, zoom)
 {
-    var x = document.getElementById('x_coord').value;
-    var y = document.getElementById('y_coord').value;
-    var zoom = document.getElementById('zoom').value;
     gl.uniform1i(uniform.IterBound, iterBound);
     gl.uniform2f(uniform.CanvasDimensions, gl.canvas.width, gl.canvas.height);
     gl.uniform2f(uniform.Center, x, y);
@@ -46,14 +41,27 @@ function renderFrame(gl, uniform, )
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    // window.requestAnimationFrame(ts => renderFrame(gl, u_IterBound, u_CanvasDimensions););
 }
 
-function main()
+function draw_main(gl, uniform)
 {
-    var canvas = document.getElementById("canvas");
-    var gl = canvas.getContext("webgl");
+    var x = document.getElementById('x_coord').value;
+    var y = document.getElementById('y_coord').value;
+    var zoom = document.getElementById('zoom').value;
+
+    render_frame(gl, uniform, x, y, zoom);
+    // window.requestAnimationFrame(ts => draw_main(gl, u_IterBound, u_CanvasDimensions););
+}
+
+function draw_target(gl, uniform)
+{
+    render_frame(gl, uniform, 0, 0, 1);
     
+}
+
+/* Setup program and return uniform locations */
+function setup_canvas(gl)
+{
     var mandelbrot_program = initShaderProgram(gl, vertex_shader_source, fragment_shader_source);
     gl.useProgram(mandelbrot_program);
 
@@ -64,17 +72,29 @@ function main()
     var a_ComplexCoords = gl.getAttribLocation(mandelbrot_program, "a_ComplexCoords");
     gl.enableVertexAttribArray(a_ComplexCoords);
     gl.vertexAttribPointer(a_ComplexCoords, 2, gl.FLOAT, false, 0, 0);
- 
-    var uniform = {
+
+    return {
         IterBound: gl.getUniformLocation(mandelbrot_program, "u_IterBound"),
         CanvasDimensions: gl.getUniformLocation(mandelbrot_program, "u_CanvasDimensions"),
         Center: gl.getUniformLocation(mandelbrot_program, "u_Center"),
         Zoom: gl.getUniformLocation(mandelbrot_program, "u_Zoom")
     };
-    renderFrame(gl, uniform);
+}
 
+function main()
+{
+    var target_canvas = document.getElementById("target_canvas");
+    var target_gl = target_canvas.getContext("webgl");
+    var target_uniform = setup_canvas(target_gl);
+    draw_target(target_gl, target_uniform);
 
-    document.getElementById("x_coord").oninput = () => renderFrame(gl, uniform);
-    document.getElementById("y_coord").oninput = () => renderFrame(gl, uniform);
-    document.getElementById("zoom").oninput = () => renderFrame(gl, uniform);
+    var main_canvas = document.getElementById("main_canvas");
+    var main_gl = main_canvas.getContext("webgl");
+    var main_uniform = setup_canvas(main_gl);
+
+    var redraw = () => draw_main(main_gl, main_uniform);
+    document.getElementById("x_coord").oninput = redraw;
+    document.getElementById("y_coord").oninput = redraw;
+    document.getElementById("zoom").oninput = redraw;
+    redraw();
 }
