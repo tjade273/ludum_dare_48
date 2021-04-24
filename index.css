@@ -48,8 +48,6 @@ button {
     max-width: 100%;
     flex-shrink: 0;
     display: flex;
-    margin-left: 10px;
-    margin-top: 10px;
     min-height: 30vh;
     flex-direction: column;
     justify-content: center;
@@ -116,6 +114,9 @@ button {
 	justify-content: center;
 	align-items: center;
     }
+    .control_wrapper {
+	margin-left: 10px;
+    }
 }
 
 @media (orientation: portrait) {
@@ -140,6 +141,7 @@ button {
     .control_wrapper {
 	justify-content: center;
 	align-items: center;
+	margin-top: 10px;
     }
     .coordinate_controls {
 	justify-content: center;

@@ -17,12 +17,18 @@
 	<div class="control_wrapper">
 	  <div class="coordinate_controls">
 	    <div class="center_coord_wrapper">
-	      <label for="center_coord">Center: </label>
-	      <input class="control_input" type="number" step="any" id="center_coord" name="center_coord">
+	      <fieldset>
+		<legend>Center</legend>
+		<label for="x_coord">x</label>
+		<input id="x_coord" name="x_coord" step="any" value="0"/>
+
+		<label for="y_coord">y</label>
+		<input id="y_coord" name="y_coord" step="any" value="0"/>
+	      </fieldset>
 	    </div>
 	    <div class="zoom_wrapper">
 	      <label for="zoom">Zoom :</label>
-	      <input class="control_input" type="number" step="any" id="zoom" name="zoom">
+	      <input class="control_input" type="number" step="any" id="zoom" name="zoom" value="1">
 	    </div>
 	    <button type="button">Reset</button> 
 	  </div>
