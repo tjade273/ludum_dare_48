@@ -1,7 +1,5 @@
 window.addEventListener("load", main);
 const iterBound = 30;
-const rzoom_min = 5;
-const rzoom_scale = 20;
 
 function loadShader(gl, type, source)
 {
@@ -57,31 +55,38 @@ function draw_main(gl, uniform)
 
 function draw_target(gl, uniform)
 {
-    render_frame(gl, uniform, 0, 0, 1);
-    var height = gl.drawingBufferHeight;
-    var width = gl.drawingBufferWidth;
-    var pixels = new Uint8Array(width * height * 4);
-    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-    boundary = [];
-    for(var x = 1; x < width - 1; x++) {
-        for(var y = 1; y < height - 1; y++) {
-            if(pixels[(x + y * width)*4 + 3] == 255) {
-                var left = pixels[((x - 1) + y * width)*4 + 3];
-                var right = pixels[((x + 1) + y * width)*4 + 3];
-                var up = pixels[(x + (y + 1)*width)*4 + 3];
-                var down = pixels[(x + (y - 1)*width)*4 + 3];
+    var a = 0;
+    var b = 0;
+    var zoom = 1;
+    render_frame(gl, uniform, a, b, zoom);
+    for(var i = 0; i < 8; i++){
+        var height = gl.drawingBufferHeight;
+        var width = gl.drawingBufferWidth;
+        var pixels = new Uint8Array(width * height * 4);
+        gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+        boundary = [];
+        for(var x = 1; x < width - 1; x++) {
+            for(var y = 1; y < height - 1; y++) {
+                if(pixels[(x + y * width)*4 + 3] == 255) {
+                    var left = pixels[((x - 1) + y * width)*4 + 3];
+                    var right = pixels[((x + 1) + y * width)*4 + 3];
+                    var up = pixels[(x + (y + 1)*width)*4 + 3];
+                    var down = pixels[(x + (y - 1)*width)*4 + 3];
                 
-                if(left+right+up+down < 255*4 ){
-                    boundary.push([x, y]);
+                    if(left+right+up+down < 255*4 ){
+                        boundary.push([x, y]);
+                    }
                 }
             }
         }
+        var center_px = boundary[Math.floor(Math.random() * boundary.length)];
+    
+        a = (4 * center_px[0] / width - 2) / zoom + a;
+        b = (4 * center_px[1] / height - 2) / zoom + b;
+        zoom *= 1 +  Math.random();
+        render_frame(gl, uniform, a, b, zoom);
     }
-    var center = boundary[Math.floor(Math.random() * boundary.length)];
-    var x = 4 * center[0] / width - 2;
-    var y = 4 * center[1] / height - 2;
-    var zoom = rzoom_min + rzoom_scale * Math.random();
-    render_frame(gl, uniform, x, y, zoom);
+    console.log(`target: ${a}, ${b}, ${zoom}`);
 }
 
 /* Setup program and return uniform locations */
