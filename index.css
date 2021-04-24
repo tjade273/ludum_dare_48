@@ -7,15 +7,22 @@
 }
 
 button {
-    max-width: 100%;
-    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.app_wrapper_wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .app_wrapper {
-    width: 95vw;
-    height: 95vh;
+    width: 95%;
+    height: 100%;
     display: flex;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .canvas_wrapper {
@@ -39,7 +46,7 @@ button {
     position: relative;
     max-height: 100%;
     max-width: 100%;
-    min-width: 30%;
+    flex-shrink: 0;
     display: flex;
     margin-left: 10px;
     margin-top: 10px;
@@ -69,26 +76,22 @@ button {
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-.target_canvas {
-    max-height: 100%;
-    position: relative;
+.target_canvas_wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: scale-down;
 }
 
-.target_canvas {
+.target_canvas_wrapper canvas {
     display: block;
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: scale-down;
-    border-style: solid;
     border-style: solid;
 }
 
@@ -109,17 +112,21 @@ button {
     .info_wrapper {
 	flex-direction: column;
     }
+    .target_wrapper {
+	justify-content: center;
+	align-items: center;
+    }
 }
 
 @media (orientation: portrait) {
     .app_wrapper {
-	padding-top: 60px;
-	padding-bottom: 100px;
 	flex-direction: column;
-	padding-bottom: 60x;
+	justify-content: center;
+	align-items: center;
+	object-fit: scale-down;
     } 
     .canvas_wrapper {
-	max-height: 60%;
+	max-height: 40%;
     }
     .coordinate_controls {
 	flex-direction: row;
@@ -127,8 +134,8 @@ button {
     .info_wrapper {
 	flex-direction: row;
     }
-    .target_canvas_wrapper canvas {
-	20vh;
+    .target_canvas_wrapper {
+	max-height: 20%;
     }
     .control_wrapper {
 	justify-content: center;
@@ -137,6 +144,9 @@ button {
     .coordinate_controls {
 	justify-content: center;
 	align-items: center;
+    }
+    .target_wrapper {
+	
     }
 }
 
