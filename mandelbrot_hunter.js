@@ -1,6 +1,6 @@
 window.addEventListener("load", main);
 
-const iterBound = 500;
+const iterBound = 50000;
 
 function loadShader(gl, type, source)
 {
@@ -34,10 +34,15 @@ function initShaderProgram(gl, vsSource, fsSource) {
 }
 
 
-function renderFrame(gl, u_IterBound, u_CanvasDimensions)
+function renderFrame(gl, uniform, )
 {
-    gl.uniform1i(u_IterBound, iterBound);
-    gl.uniform2f(u_CanvasDimensions, gl.canvas.width, gl.canvas.height);
+    var x = document.getElementById('x_coord').value;
+    var y = document.getElementById('y_coord').value;
+    var zoom = document.getElementById('zoom').value;
+    gl.uniform1i(uniform.IterBound, iterBound);
+    gl.uniform2f(uniform.CanvasDimensions, gl.canvas.width, gl.canvas.height);
+    gl.uniform2f(uniform.Center, x, y);
+    gl.uniform1f(uniform.Zoom, zoom);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -49,7 +54,6 @@ function main()
     var canvas = document.getElementById("canvas");
     var gl = canvas.getContext("webgl");
     
-    console.log(vertex_shader_source);
     var mandelbrot_program = initShaderProgram(gl, vertex_shader_source, fragment_shader_source);
     gl.useProgram(mandelbrot_program);
 
@@ -61,8 +65,16 @@ function main()
     gl.enableVertexAttribArray(a_ComplexCoords);
     gl.vertexAttribPointer(a_ComplexCoords, 2, gl.FLOAT, false, 0, 0);
  
+    var uniform = {
+        IterBound: gl.getUniformLocation(mandelbrot_program, "u_IterBound"),
+        CanvasDimensions: gl.getUniformLocation(mandelbrot_program, "u_CanvasDimensions"),
+        Center: gl.getUniformLocation(mandelbrot_program, "u_Center"),
+        Zoom: gl.getUniformLocation(mandelbrot_program, "u_Zoom")
+    };
+    renderFrame(gl, uniform);
 
-    var u_IterBound = gl.getUniformLocation(mandelbrot_program, "u_IterBound");
-    var u_CanvasDimensions = gl.getUniformLocation(mandelbrot_program, "u_CanvasDimensions"); 
-    renderFrame(gl, u_IterBound, u_CanvasDimensions);
+
+    document.getElementById("x_coord").oninput = () => renderFrame(gl, uniform);
+    document.getElementById("y_coord").oninput = () => renderFrame(gl, uniform);
+    document.getElementById("zoom").oninput = () => renderFrame(gl, uniform);
 }
