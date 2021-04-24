@@ -61,6 +61,10 @@ button {
     display: flex;
 }
 
+.center_coord_wrapper {
+    display: flex;
+}
+
 .info_wrapper {
     position: relative;
     max-height: 100%;
@@ -127,7 +131,8 @@ button {
 	object-fit: scale-down;
     } 
     .canvas_wrapper {
-	max-height: 40%;
+	max-height: 60%;
+	max-width: 60%;
     }
     .coordinate_controls {
 	flex-direction: row;
@@ -136,7 +141,8 @@ button {
 	flex-direction: row;
     }
     .target_canvas_wrapper {
-	max-height: 20%;
+	max-height: 40%;
+	max-width: 40%;
     }
     .control_wrapper {
 	justify-content: center;
