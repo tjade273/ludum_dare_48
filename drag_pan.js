@@ -69,7 +69,7 @@ function zoom_canvas(event)
 {
     event.preventDefault();
     let zoom = Number(document.getElementById('zoom').value);
-    document.getElementById('zoom').value = zoom + event.deltaY * 0.01;
+    document.getElementById('zoom').value = zoom * (1 + event.deltaY * 0.01);
     redraw_main();
 }
 
