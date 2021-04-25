@@ -6,8 +6,12 @@
     font-size: 1em;
 }
 
+#coords {
+    display: none;
+}
+
 input {
-    width: 6em;
+    width: 4em;
 }
 
 button {
@@ -157,8 +161,8 @@ button {
 	flex-direction: row;
     }
     .target_canvas_wrapper {
-	max-height: 60%;
-	max-width: 60%;
+	max-height: 40%;
+	max-width: 40%;
     }
     .control_wrapper {
 	justify-content: center;

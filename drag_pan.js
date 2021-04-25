@@ -21,7 +21,7 @@ function setup_pan() {
 	pointerCoords = {x: pointerX, y: pointerY};
 	return pointerCoords;
     }
-    
+			    
     canvas.addEventListener('pointermove', e => {
 	let coords = getPointerCoords(e);
 	pan(e);
