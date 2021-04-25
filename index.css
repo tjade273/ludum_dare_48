@@ -115,8 +115,6 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: -30;
-    max-width: 20vw;
 }
 
 .target_canvas_wrapper {
@@ -124,6 +122,9 @@ button {
     justify-content: center;
     align-items: center;
     object-fit: scale-down;
+    z-index: -30;
+    max-width: 20vw;
+    max-height: 20vw;
 }
 
 .target_canvas_wrapper canvas {
