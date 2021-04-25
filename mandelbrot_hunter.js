@@ -1,6 +1,6 @@
 window.addEventListener("load", main);
 const iterBound = 100;
-const qual_scale = 300;;
+const qual_scale = 100;;
 var qual_minn = null;
 var main_gl = null;
 var main_uniform = null;
