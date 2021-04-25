@@ -172,6 +172,9 @@ button {
     .zoom_wrapper {
 	flex-direction: column;
     }
+    .control_wrapper_wrapper {
+	max-width: 35vw;
+    }
 }
 
 @media (orientation: portrait) {
@@ -247,5 +250,6 @@ button {
     .target_canvas_wrapper {
 	max-height: 40%;
 	max-width: 40%;
+	z-index: -30;
     }
 }
