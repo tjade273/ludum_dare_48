@@ -1,5 +1,6 @@
 window.addEventListener("load", main);
 const iterBound = 30;
+var redraw_main = null;
 
 function loadShader(gl, type, source)
 {
@@ -111,6 +112,16 @@ function setup_canvas(gl)
     };
 }
 
+
+function reset_main()
+{
+    document.getElementById('x_coord').value = 0;
+    document.getElementById('y_coord').value = 0;
+    document.getElementById('zoom').value = 1;
+    redraw_main();
+
+}
+
 function main()
 {
     var target_canvas = document.getElementById("target_canvas");
@@ -123,10 +134,7 @@ function main()
     var main_gl = main_canvas.getContext("webgl");
     var main_uniform = setup_canvas(main_gl);
 
-    var redraw = () => draw_main(main_gl, main_uniform);
-    document.getElementById("x_coord").oninput = redraw;
-    document.getElementById("y_coord").oninput = redraw;
-    document.getElementById("zoom").oninput = redraw;
-    redraw();
+    redraw_main = () => draw_main(main_gl, main_uniform);
+    reset_main();
     setup_pan();
 }

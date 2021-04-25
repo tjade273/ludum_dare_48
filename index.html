@@ -21,19 +21,19 @@
 	    <div class="center_coord_wrapper">
 	      <div class="coord_wrapper">
 		<label for="x_coord">x: </label>
-		<input id="x_coord" name="x_coord" type="number" step="any" autocomplete=off value="0" class="control_input"/>
+		<input id="x_coord" name="x_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
 	      </div>
 	      <div class="coord_wrapper">
 		<label for="y_coord">y: </label>
-		<input id="y_coord" name="y_coord" type="number" step="any" autocomplete=off value="0" class="control_input"/>
+		<input id="y_coord" name="y_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
 	      </div>
 	    </div>
 	    <div class="zoom_wrapper">
 	      <div class="coord_wrapper">
 		<label for="zoom">Zoom: </label>
-		<input class="control_input" type="number" step="any" min="1" autocomplete=off id="zoom" name="zoom" value="1">
+		<input class="control_input" type="number" step="any" min="1" autocomplete=off id="zoom" name="zoom" value="1" oninput="redraw_main()">
 	      </div>
-	      <button type="button" id="reset">Reset</button>
+	      <button type="button" id="reset" onclick="reset_main()">Reset</button>
 	    </div> 
 	  </div>
 	  <div class="info_wrapper">
