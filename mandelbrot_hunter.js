@@ -4,6 +4,7 @@ var main_gl = null;
 var main_uniform = null;
 var target_gl = null;
 var target_uniform = null;
+var box = [0,0,0,0];
 
 function redraw_main()
 {
@@ -12,6 +13,7 @@ function redraw_main()
 
 function new_target()
 {
+    box = [0,0,0,0];
     draw_target(target_gl, target_uniform);
     redraw_main(); // remove square
 }
@@ -47,7 +49,7 @@ function initShaderProgram(gl, vsSource, fsSource) {
     return shaderProgram;
 }
 
-function render_frame(gl, uniform, x, y, zoom, box = [0,0,0,0])
+function render_frame(gl, uniform, x, y, zoom, box)
 {
     gl.uniform1i(uniform.IterBound, iterBound);
     gl.uniform2f(uniform.CanvasDimensions, gl.canvas.width, gl.canvas.height);
@@ -65,7 +67,7 @@ function draw_main(gl, uniform)
     var y = document.getElementById('y_coord').value;
     var zoom = document.getElementById('zoom').value;
 
-    render_frame(gl, uniform, x, y, zoom);
+    render_frame(gl, uniform, x, y, zoom, box);
     // window.requestAnimationFrame(ts => draw_main(gl, u_IterBound, u_CanvasDimensions););
 }
 
@@ -74,7 +76,7 @@ function draw_target(gl, uniform)
     var a = 0;
     var b = 0;
     var zoom = 1;
-    render_frame(gl, uniform, a, b, zoom);
+    render_frame(gl, uniform, a, b, zoom, box);
     for(var i = 0; i < 8; i++){
         var height = gl.drawingBufferHeight;
         var width = gl.drawingBufferWidth;
@@ -100,7 +102,7 @@ function draw_target(gl, uniform)
         a = (4 * center_px[0] / width - 2) / zoom + a;
         b = (4 * center_px[1] / height - 2) / zoom + b;
         zoom *= 1 +  Math.random();
-        render_frame(gl, uniform, a, b, zoom);
+        render_frame(gl, uniform, a, b, zoom, box);
     }
     reveal_square = () => draw_square(a, b, zoom);
 }
@@ -130,6 +132,7 @@ function setup_canvas(gl)
 
 function reset_main()
 {
+    box = [0,0,0,0]
     document.getElementById('x_coord').value = 0;
     document.getElementById('y_coord').value = 0;
     document.getElementById('zoom').value = 1;
@@ -137,7 +140,7 @@ function reset_main()
 }
 
 function draw_square(x, y, scale){
-    var box = [
+    box = [
         x - 2/scale, y - 2/scale,
         x + 2/scale, y + 2/scale,
     ];
@@ -146,7 +149,6 @@ function draw_square(x, y, scale){
     var y = document.getElementById('y_coord').value;
     var zoom = document.getElementById('zoom').value;
     
-    console.log(box)
     render_frame(main_gl, main_uniform, x, y, zoom, box);
 }
 
