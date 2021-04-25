@@ -115,6 +115,8 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: -30;
+    max-width: 20vw;
 }
 
 .target_canvas_wrapper {
