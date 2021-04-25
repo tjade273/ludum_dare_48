@@ -173,7 +173,7 @@ button {
 	flex-direction: column;
     }
     .control_wrapper_wrapper {
-	max-width: 35vw;
+	min-width: 40vw;
     }
 }
 
