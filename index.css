@@ -183,7 +183,36 @@ button {
     }
     .zoom_wrapper {
 	flex-direction: row;
-    }   
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    
+    body {
+	overflow: hidden;
+    }
+    
+    .app_wrapper {
+	justify-content: flex-start;
+    }
+	
+    .canvas_wrapper {
+	max-height: 80%;
+	max-width: 80%;
+    }
+    
+    .target_canvas_wrapper canvas {
+    }
+    
+    .control_wrapper {
+	justify-content: flex-start;
+    }
 
 }
 
+@media only screen and (max-width: 700px) and (orientation: landscape) {
+    .target_canvas_wrapper {
+	max-height: 40%;
+	max-width: 40%;
+    }
+}
