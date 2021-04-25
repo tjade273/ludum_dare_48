@@ -65,11 +65,23 @@ function setup_pan() {
     document.getElementById("main_canvas").onwheel = zoom_canvas;
 }
 
-
 function zoom_canvas(event)
 {
     event.preventDefault();
     let zoom = Number(document.getElementById('zoom').value);
     document.getElementById('zoom').value = zoom + event.deltaY * 0.01;
+    redraw_main();
+}
+
+function double_zoom() {
+    let zoom = Number(document.getElementById('zoom').value);
+    document.getElementById('zoom').value = zoom * 2.0;
+    redraw_main();
+}
+
+
+function half_zoom() {
+    let zoom = Number(document.getElementById('zoom').value);
+    document.getElementById('zoom').value = zoom * 0.5;
     redraw_main();
 }

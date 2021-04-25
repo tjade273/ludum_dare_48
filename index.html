@@ -1,4 +1,4 @@
-`<!DOCTYPE html>
+<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <html lang=en>
   <head>
@@ -31,7 +31,9 @@
 	    <div class="zoom_wrapper">
 	      <div class="coord_wrapper">
 		<label for="zoom">Zoom: </label>
-		<input class="control_input" type="number" step="any" min="1" autocomplete=off id="zoom" name="zoom" value="1" oninput="redraw_main()">
+		<input class="control_input" type="number" step="any" min="0" autocomplete=off id="zoom" name="zoom" value="1" oninput="redraw_main()">
+		<button type="button" id="double_zoom" onclick="double_zoom()"> 2x </button>
+		<button type="button" id="half_zoom" onclick="half_zoom()"> 0.5x </button>
 	      </div>
 	      <button type="button" id="reset" onclick="reset_main()">Reset</button>
 	    </div> 
