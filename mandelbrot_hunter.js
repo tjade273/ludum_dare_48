@@ -128,5 +128,5 @@ function main()
     document.getElementById("y_coord").oninput = redraw;
     document.getElementById("zoom").oninput = redraw;
     redraw();
-    setup_zoom();
+    setup_pan();
 }
