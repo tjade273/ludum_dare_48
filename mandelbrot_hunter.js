@@ -1,7 +1,7 @@
 window.addEventListener("load", main);
 const iterBound = 100;
-const qual_min = 600;
-const qual_scale = 200;;
+const qual_scale = 300;;
+var qual_minn = null;
 var main_gl = null;
 var main_uniform = null;
 var target_gl = null;
@@ -178,6 +178,7 @@ function main()
     target_uniform = setup_canvas(target_gl);
 
     var main_canvas = document.getElementById("main_canvas");
+    qual_min = main_canvas.height;
     main_gl = main_canvas.getContext("experimental-webgl");
     main_uniform = setup_canvas(main_gl);
 
