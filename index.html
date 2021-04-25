@@ -8,11 +8,12 @@
   <body>
     <script src = "shader.vs.js" type = "text/javascript"> </script>
     <script src = "shader.fs.js" type = "text/javascript"> </script>
-    <script src="mandelbrot_hunter.js"></script>
+    <script src = "mandelbrot_hunter.js"></script>
+    <script src = "drag_and_zoom.js"> </script>
     <div class="app_wrapper_wrapper">
       <div class="app_wrapper">
 	<div class="canvas_wrapper">
-	  <canvas id="canvas" width="600px" height="600px"></canvas>
+	  <canvas id="main_canvas" width="600px" height="600px"></canvas>
 	</div>
 	<div class="control_wrapper">
 	  <div class="coordinate_controls">
@@ -20,17 +21,17 @@
 	    <div class="center_coord_wrapper">
 	      <div class="coord_wrapper">
 		<label for="x_coord">x: </label>
-		<input id="x_coord" name="x_coord" type="number" step="any" value="0" class="control_input"/>
+		<input id="x_coord" name="x_coord" type="number" step="any" autocomplete=off value="0" class="control_input"/>
 	      </div>
 	      <div class="coord_wrapper">
 		<label for="y_coord">y: </label>
-		<input id="y_coord" name="y_coord" type="number" step="any" value="0" class="control_input"/>
+		<input id="y_coord" name="y_coord" type="number" step="any" autocomplete=off value="0" class="control_input"/>
 	      </div>
 	    </div>
 	    <div class="zoom_wrapper">
 	      <div class="coord_wrapper">
 		<label for="zoom">Zoom: </label>
-		<input class="control_input" type="number" step="any" id="zoom" name="zoom" value="1">
+		<input class="control_input" type="number" step="any" autocomplete=off id="zoom" name="zoom" value="1">
 	      </div>
 	      <button type="button" id="reset">Reset</button>
 	    </div> 
@@ -38,7 +39,7 @@
 	  <div class="info_wrapper">
 	    <div class="target_wrapper">
 	      <div class="target_canvas_wrapper">
-		<canvas class="target_canvas" width="200px" height="200px"></canvas>
+		<canvas class="target_canvas" id="target_canvas" width="200px" height="200px"></canvas>
 	      </div>
 	      <button type="button" id="new_target"> New Target </button>
 	    </div>
