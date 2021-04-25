@@ -10,7 +10,7 @@ var last_render_time = 0;
 function redraw_main()
 {
     var now = performance.now();
-    if(now - last_render_time < 100) {
+    if(now - last_render_time < 8) {
         window.requestAnimationFrame(redraw_main);
     }
     else {
