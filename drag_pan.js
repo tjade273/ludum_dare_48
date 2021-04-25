@@ -62,4 +62,14 @@ function setup_pan() {
 	}
 	
     }
+    document.getElementById("main_canvas").onwheel = zoom_canvas;
+}
+
+
+function zoom_canvas(event)
+{
+    event.preventDefault();
+    let zoom = Number(document.getElementById('zoom').value);
+    document.getElementById('zoom').value = zoom + event.deltaY * 0.01;
+    redraw_main();
 }
