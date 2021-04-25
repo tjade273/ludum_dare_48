@@ -165,3 +165,13 @@ function main()
     new_target();
     setup_pan();
 }
+
+function show_rules() {
+    document.getElementById("control_wrapper").style.display = "none";
+    document.getElementById("rules_wrapper").style.display = "flex";
+}
+
+function hide_rules() {
+    document.getElementById("control_wrapper").style.display = "flex";
+    document.getElementById("rules_wrapper").style.display = "none";
+}

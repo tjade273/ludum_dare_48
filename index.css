@@ -19,20 +19,20 @@ button {
     height: auto;
 }
 
-.rules_wrapper {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: auto;
+.control_wrapper_wrapper {
     display: flex;
+}
+
+.rules_wrapper {
+    display: none;
     overflow: visible;
     width: 100%;
     height: 100%;
     z-index: 20;
     justify-self: start;
     alight-self: start;
-    
-    /*align-self: start;*/
+    padding: 20px;
+    background-color: #cccccc;
 }
 
 .rules {
@@ -41,7 +41,7 @@ button {
     position: relative;
     width: auto;
     height: auto;
-    background-color: #cccccc;
+    overflow: visible;
 }
 
 .app_wrapper_wrapper {
@@ -63,6 +63,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    touch-action: none;
 }
 
 .canvas_wrapper canvas {
@@ -215,7 +216,7 @@ button {
 @media only screen and (max-width: 700px) {
     
     body {
-	overflow: hidden;
+	/*overflow: hidden;*/
     }
 
     .app_wrapper_wrapper {
@@ -230,6 +231,7 @@ button {
     .canvas_wrapper {
 	max-height: 80%;
 	max-width: 80%;
+	overflow: hidden;
     }
     
     .target_canvas_wrapper canvas {

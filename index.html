@@ -12,60 +12,56 @@
     <script src = "mandelbrot_hunter.js"></script>
     <script src = "drag_pan.js"> </script>
     <div class="app_wrapper_wrapper">
-      <div class="rules_wrapper">
-	<details>
-	  <summary>
-	    <span style="background-color: #cccccc; cursor: pointer">
-	      Rules
-	    </span>
-	  </summary>
-	  <p class="rules">
-	    Try to locate the target section of the Mandelbrot set by panning and
-	    zooming into the set. Click "reveal location" to see whether you've found
-	    the target or merely a recursively simular section ;)
-	    <br>
-	    <b>Desktop controls:</b> drag to pan and scroll to pan.
-	    <br>
-	    <b>Mobile controls:</b> drag to pan and use the 2x and 0.5 buttons to zoom.
-	    I had 48 hours to make this UI so it might not actually work on your device, sorry.
-	  </p>
-	</details>
-      </div>
       <div class="app_wrapper">
 	<div class="canvas_wrapper">
 	  <canvas id="main_canvas" width="600px" height="600px"></canvas>
 	</div>
-	<div class="control_wrapper">
-	  <div class="coordinate_controls">
-	    <p id="coords"> (,)</p>
-	    <div class="center_coord_wrapper">
-	      <div class="coord_wrapper">
-		<label for="x_coord">x: </label>
-		<input id="x_coord" name="x_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
-	      </div>
-	      <div class="coord_wrapper">
-		<label for="y_coord">y: </label>
-		<input id="y_coord" name="y_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
-	      </div>
-	      <button type="button" id="rules">?</button>
+	<div class="control_wrapper_wrapper">
+	  <div class="rules_wrapper" id="rules_wrapper">
+	    <div class="rules">
+	      Try to locate the target section of the Mandelbrot set by panning and
+	      zooming into the set. Click "reveal location" to see whether you've found
+	      the target or merely a recursively simular section ;)
+	      <br><br>
+	      <b>Desktop controls:</b> drag to pan and scroll to zoom.
+	      <br><br>
+	      <b>Mobile controls:</b> drag to pan and use the 2x and 0.5 buttons to zoom.
+	      <br><br>
+	      <button type="button" id="play" onclick="hide_rules()">Play</button>
 	    </div>
-	    <div class="zoom_wrapper">
-	      <div class="coord_wrapper">
-		<label for="zoom">Zoom: </label>
-		<input class="control_input" type="number" step="any" min="0" autocomplete=off id="zoom" name="zoom" value="1" oninput="redraw_main()">
-		<button type="button" id="double_zoom" onclick="double_zoom()"> 2x </button>
-		<button type="button" id="half_zoom" onclick="half_zoom()"> 0.5x </button>
-	      </div>
-	      <button type="button" id="reset" onclick="reset_main()">Reset</button>
-	    </div> 
 	  </div>
-	  <div class="info_wrapper">
-	    <div class="target_wrapper">
-	      <div class="target_canvas_wrapper">
-		<canvas class="target_canvas" id="target_canvas" width="200px" height="200px"></canvas>
+	  <div class="control_wrapper" id="control_wrapper">
+	    <div class="coordinate_controls">
+	      <p id="coords"> (,)</p>
+	      <div class="center_coord_wrapper">
+		<div class="coord_wrapper">
+		  <label for="x_coord">x: </label>
+		  <input id="x_coord" name="x_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
+		</div>
+		<div class="coord_wrapper">
+		  <label for="y_coord">y: </label>
+		  <input id="y_coord" name="y_coord" type="number" step="any" autocomplete=off value="0" class="control_input" oninput="redraw_main()"/>
+		</div>
+		<button type="button" id="rules" onclick="show_rules()">?</button>
 	      </div>
-	      <button type="button" id="new_target" onclick="new_target()"> New Target </button>
-	      <button type="button" id="reveal_loc" onclick="reveal_square()"> Reveal Location </button>
+	      <div class="zoom_wrapper">
+		<div class="coord_wrapper">
+		  <label for="zoom">Zoom: </label>
+		  <input class="control_input" type="number" step="any" min="0" autocomplete=off id="zoom" name="zoom" value="1" oninput="redraw_main()">
+		  <button type="button" id="double_zoom" onclick="double_zoom()"> 2x </button>
+		  <button type="button" id="half_zoom" onclick="half_zoom()"> 0.5x </button>
+		</div>
+		<button type="button" id="reset" onclick="reset_main()">Reset</button>
+	      </div> 
+	    </div>
+	    <div class="info_wrapper">
+	      <div class="target_wrapper">
+		<div class="target_canvas_wrapper">
+		  <canvas class="target_canvas" id="target_canvas" width="200px" height="200px"></canvas>
+		</div>
+		<button type="button" id="new_target" onclick="new_target()"> New Target </button>
+		<button type="button" id="reveal_loc" onclick="reveal_square()"> Reveal Location </button>
+	      </div>
 	    </div>
 	  </div>
 	</div>
