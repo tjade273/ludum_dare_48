@@ -6,6 +6,7 @@ uniform int u_IterBound;
 uniform vec2 u_CanvasDimensions;
 uniform vec2 u_Center;
 uniform float u_Zoom;
+uniform vec4 u_Box;
 
 const int max_iters = 1000000;
 const vec3 a = vec3(0.5,0.5,0.5);
@@ -27,7 +28,8 @@ void main(){
     vec2 x = (4.0 * gl_FragCoord.xy / u_CanvasDimensions) - vec2(2.0);
     x /= u_Zoom;
     x += u_Center;
- 
+    
+
     gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
     for(int i = 0; i < max_iters; i++) {
         if (i >= u_IterBound)
@@ -38,6 +40,11 @@ void main(){
             gl_FragColor = vec4(palette(float(i) / float(u_IterBound), a, b, c, d), 0.9);
             break;
         }
+    }
+
+    if(x.x > u_Box.x && x.y > u_Box.y && x.x < u_Box.z && x.y < u_Box.w){
+        gl_FragColor += vec4(0.0, 200.0, 0.0, 0.0);
+        return;
     }
 }
 `

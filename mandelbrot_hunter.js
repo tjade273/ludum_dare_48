@@ -1,6 +1,20 @@
 window.addEventListener("load", main);
 const iterBound = 30;
-var redraw_main = null;
+var main_gl = null;
+var main_uniform = null;
+var target_gl = null;
+var target_uniform = null;
+
+function redraw_main()
+{
+    draw_main(main_gl, main_uniform);
+}
+
+function new_target()
+{
+    draw_target(target_gl, target_uniform);
+    redraw_main(); // remove square
+}
 
 function loadShader(gl, type, source)
 {
@@ -33,12 +47,13 @@ function initShaderProgram(gl, vsSource, fsSource) {
     return shaderProgram;
 }
 
-function render_frame(gl, uniform, x, y, zoom)
+function render_frame(gl, uniform, x, y, zoom, box = [0,0,0,0])
 {
     gl.uniform1i(uniform.IterBound, iterBound);
     gl.uniform2f(uniform.CanvasDimensions, gl.canvas.width, gl.canvas.height);
     gl.uniform2f(uniform.Center, x, y);
     gl.uniform1f(uniform.Zoom, zoom);
+    gl.uniform4f(uniform.Box, box[0], box[1], box[2], box[3]);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -87,7 +102,7 @@ function draw_target(gl, uniform)
         zoom *= 1 +  Math.random();
         render_frame(gl, uniform, a, b, zoom);
     }
-    console.log(`target: ${a}, ${b}, ${zoom}`);
+    reveal_square = () => draw_square(a, b, zoom);
 }
 
 /* Setup program and return uniform locations */
@@ -103,15 +118,15 @@ function setup_canvas(gl)
     var a_ComplexCoords = gl.getAttribLocation(mandelbrot_program, "a_ComplexCoords");
     gl.enableVertexAttribArray(a_ComplexCoords);
     gl.vertexAttribPointer(a_ComplexCoords, 2, gl.FLOAT, false, 0, 0);
-
+    
     return {
         IterBound: gl.getUniformLocation(mandelbrot_program, "u_IterBound"),
         CanvasDimensions: gl.getUniformLocation(mandelbrot_program, "u_CanvasDimensions"),
         Center: gl.getUniformLocation(mandelbrot_program, "u_Center"),
-        Zoom: gl.getUniformLocation(mandelbrot_program, "u_Zoom")
+        Zoom: gl.getUniformLocation(mandelbrot_program, "u_Zoom"),
+        Box: gl.getUniformLocation(mandelbrot_program, "u_Box")
     };
 }
-
 
 function reset_main()
 {
@@ -119,22 +134,33 @@ function reset_main()
     document.getElementById('y_coord').value = 0;
     document.getElementById('zoom').value = 1;
     redraw_main();
+}
 
+function draw_square(x, y, scale){
+    var box = [
+        x - 2/scale, y - 2/scale,
+        x + 2/scale, y + 2/scale,
+    ];
+    
+    var x = document.getElementById('x_coord').value;
+    var y = document.getElementById('y_coord').value;
+    var zoom = document.getElementById('zoom').value;
+    
+    console.log(box)
+    render_frame(main_gl, main_uniform, x, y, zoom, box);
 }
 
 function main()
 {
     var target_canvas = document.getElementById("target_canvas");
-    var target_gl = target_canvas.getContext("webgl");
-    var target_uniform = setup_canvas(target_gl);
-    document.getElementById("new_target").onclick = () => draw_target(target_gl, target_uniform);
-    draw_target(target_gl, target_uniform);
+    target_gl = target_canvas.getContext("experimental-webgl");
+    target_uniform = setup_canvas(target_gl);
 
     var main_canvas = document.getElementById("main_canvas");
-    var main_gl = main_canvas.getContext("webgl");
-    var main_uniform = setup_canvas(main_gl);
+    main_gl = main_canvas.getContext("experimental-webgl");
+    main_uniform = setup_canvas(main_gl);
 
-    redraw_main = () => draw_main(main_gl, main_uniform);
     reset_main();
+    new_target();
     setup_zoom();
 }
