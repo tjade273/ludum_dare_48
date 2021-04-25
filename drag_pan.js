@@ -22,11 +22,7 @@ function setup_pan() {
 	return pointerCoords;
     }
 			    
-    canvas.addEventListener('pointermove', e => {
-	let coords = getPointerCoords(e);
-	pan(e);
-	document.getElementById("coords").textContent = "(" + coords.x.toFixed(6) + "," + coords.y.toFixed(6) + ")";
-    });
+    canvas.addEventListener('pointermove', pan);
         
     canvas.addEventListener('pointerdown', e => {
 	if (!isPanDragging) {

@@ -5,10 +5,18 @@ var main_uniform = null;
 var target_gl = null;
 var target_uniform = null;
 var box = [0,0,0,0];
+var last_render_time = 0;
 
 function redraw_main()
 {
-    draw_main(main_gl, main_uniform);
+    var now = performance.now();
+    if(now - last_render_time < 100) {
+        window.requestAnimationFrame(redraw_main);
+    }
+    else {
+        draw_main(main_gl, main_uniform);
+        last_render_time = now;
+    }
 }
 
 function new_target()
