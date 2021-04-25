@@ -1,5 +1,5 @@
 window.addEventListener("load", main);
-const iterBound = 30;
+const iterBound = 50;
 var main_gl = null;
 var main_uniform = null;
 var target_gl = null;
@@ -68,7 +68,6 @@ function draw_main(gl, uniform)
     var zoom = document.getElementById('zoom').value;
 
     render_frame(gl, uniform, x, y, zoom, box);
-    // window.requestAnimationFrame(ts => draw_main(gl, u_IterBound, u_CanvasDimensions););
 }
 
 function draw_target(gl, uniform)
@@ -164,5 +163,5 @@ function main()
 
     reset_main();
     new_target();
-    setup_zoom();
+    setup_pan();
 }
