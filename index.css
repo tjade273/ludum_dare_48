@@ -172,6 +172,10 @@ button {
     .zoom_wrapper {
 	flex-direction: column;
     }
+
+    .control_wrapper_wrapper {
+	max-width: 30vw;
+    }
 }
 
 @media (orientation: portrait) {
