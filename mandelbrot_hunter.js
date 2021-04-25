@@ -1,5 +1,5 @@
 window.addEventListener("load", main);
-const iterBound = 30;
+const iterBound = 100;
 var redraw_main = null;
 
 function loadShader(gl, type, source)
