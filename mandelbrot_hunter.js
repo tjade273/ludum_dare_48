@@ -1,5 +1,5 @@
 window.addEventListener("load", main);
-const iterBound = 50;
+const iterBound = 100;
 var main_gl = null;
 var main_uniform = null;
 var target_gl = null;
@@ -172,4 +172,14 @@ function main()
     reset_main();
     new_target();
     setup_pan();
+}
+
+function show_rules() {
+    document.getElementById("control_wrapper").style.display = "none";
+    document.getElementById("rules_wrapper").style.display = "flex";
+}
+
+function hide_rules() {
+    document.getElementById("control_wrapper").style.display = "flex";
+    document.getElementById("rules_wrapper").style.display = "none";
 }
