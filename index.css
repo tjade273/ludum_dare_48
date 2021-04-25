@@ -183,6 +183,7 @@ button {
     }
     .control_wrapper_wrapper {
 	min-width: 40vw;
+	margin-left: 10px;
     }
 }
 
