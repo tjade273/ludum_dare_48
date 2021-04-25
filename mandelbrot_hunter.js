@@ -1,11 +1,23 @@
 window.addEventListener("load", main);
 const iterBound = 100;
+const qual_min = 600;
+const qual_scale = 200;;
 var main_gl = null;
 var main_uniform = null;
 var target_gl = null;
 var target_uniform = null;
 var box = [0,0,0,0];
 var last_render_time = 0;
+
+function update_quality()
+{
+    var quality = document.getElementById("quality").value;
+    var size = qual_min + qual_scale * quality;
+    main_gl.canvas.width = size;
+    main_gl.canvas.height = size; 
+    main_gl.viewport(0, 0, size, size);
+    redraw_main();
+}
 
 function redraw_main()
 {
@@ -170,6 +182,7 @@ function main()
     main_uniform = setup_canvas(main_gl);
 
     reset_main();
+    update_quality();    
     new_target();
     setup_pan();
 }
