@@ -158,8 +158,8 @@ button {
 	flex-direction: row;
     }
     .canvas_wrapper {
-	max-height: 100%;
-	max-width: 100%;
+	width: 95vh;
+	height: 95vh;
     }
     .coordinate_controls {
 	flex-direction: column;
