@@ -24,9 +24,7 @@ function setup_pan() {
 			    
     canvas.addEventListener('pointermove', e => {
 	e.preventDefault();
-	let coords = getPointerCoords(e);
 	pan(e);
-	document.getElementById("coords").textContent = "(" + coords.x.toFixed(6) + "," + coords.y.toFixed(6) + ")";
     });
         
     canvas.addEventListener('pointerdown', e => {
@@ -70,7 +68,7 @@ function zoom_canvas(event)
 {
     event.preventDefault();
     let zoom = Number(document.getElementById('zoom').value);
-    document.getElementById('zoom').value = zoom * (1 + event.deltaY * 0.01);
+    document.getElementById('zoom').value = Math.max(zoom * (1 + event.deltaY * 0.01), 1);
     redraw_main();
 }
 
